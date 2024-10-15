@@ -48,7 +48,7 @@ if __name__ == '__main__':
         db.session.add_all(customers)
         db.session.commit()
 
-        # Insert your own cars
+        
         cars = [
             Car(
                 model="Corolla",
