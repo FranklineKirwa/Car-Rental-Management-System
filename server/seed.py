@@ -6,34 +6,34 @@ if __name__ == '__main__':
     with app.app_context():
         print("Starting seed...")
 
-        # Drop and create all tables
+
         db.drop_all()
         db.create_all()
 
-        # Insert your own customer profiles
+
         customer_profiles = [
             CustomerProfile(
                 bio="Avid car enthusiast and traveler.",
                 social_links="https://twitter.com/example",
-                created_at=datetime.strptime('2024-01-15', '%Y-%m-%d')  # Convert string to datetime
+                created_at=datetime.strptime('2024-01-15', '%Y-%m-%d')
             ),
             CustomerProfile(
                 bio="Tech-savvy individual who loves road trips.",
                 social_links="https://linkedin.com/in/example",
-                created_at=datetime.strptime('2024-02-10', '%Y-%m-%d')  # Convert string to datetime
+                created_at=datetime.strptime('2024-02-10', '%Y-%m-%d')
             )
         ]
         db.session.add_all(customer_profiles)
         db.session.commit()
 
-        # Insert your own customers
+
         customers = [
             Customer(
                 name="John Doe",
                 email="john.doe@example.com",
                 phone_number="555-1234",
                 address="123 Main St, Anytown, USA",
-                date_of_birth=datetime.strptime('1985-06-15', '%Y-%m-%d').date(),  # Convert string to date
+                date_of_birth=datetime.strptime('1985-06-15', '%Y-%m-%d').date(),
                 profile_id=customer_profiles[0].id
             ),
             Customer(
@@ -41,14 +41,14 @@ if __name__ == '__main__':
                 email="jane.smith@example.com",
                 phone_number="555-5678",
                 address="456 Oak St, Othertown, USA",
-                date_of_birth=datetime.strptime('1990-09-23', '%Y-%m-%d').date(),  # Convert string to date
+                date_of_birth=datetime.strptime('1990-09-23', '%Y-%m-%d').date(),
                 profile_id=customer_profiles[1].id
             )
         ]
         db.session.add_all(customers)
         db.session.commit()
 
-        
+
         cars = [
             Car(
                 model="Corolla",
@@ -73,20 +73,20 @@ if __name__ == '__main__':
         # Insert your own rentals
         rentals = [
             Rental(
-                start_date=datetime.strptime('2024-08-01', '%Y-%m-%d'),  # Use datetime for start_date
-                end_date=datetime.strptime('2024-08-05', '%Y-%m-%d'),    # Use datetime for end_date
+                start_date=datetime.strptime('2024-08-01', '%Y-%m-%d'),
+                end_date=datetime.strptime('2024-08-05', '%Y-%m-%d'),
                 total_price=200.00,
                 status="completed",
-                booking_date=datetime.strptime('2024-07-25', '%Y-%m-%d'),  # Use datetime for booking_date
+                booking_date=datetime.strptime('2024-07-25', '%Y-%m-%d'),
                 customer_id=customers[0].id,
                 car_id=cars[0].id
             ),
             Rental(
-                start_date=datetime.strptime('2024-09-10', '%Y-%m-%d'),  # Use datetime for start_date
-                end_date=datetime.strptime('2024-09-15', '%Y-%m-%d'),    # Use datetime for end_date
+                start_date=datetime.strptime('2024-09-10', '%Y-%m-%d'),
+                end_date=datetime.strptime('2024-09-15', '%Y-%m-%d'),
                 total_price=225.00,
                 status="booked",
-                booking_date=datetime.strptime('2024-09-01', '%Y-%m-%d'),  # Use datetime for booking_date
+                booking_date=datetime.strptime('2024-09-01', '%Y-%m-%d'),  
                 customer_id=customers[1].id,
                 car_id=cars[1].id
             )
