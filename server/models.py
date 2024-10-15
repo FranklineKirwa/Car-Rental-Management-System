@@ -24,16 +24,15 @@ class Customer(db.Model, SerializerMixin):
     date_of_birth = db.Column(db.Date, nullable=False)
     profile_id = db.Column(db.Integer, db.ForeignKey('customer_profiles.id'))
 
-    # Many-to-many relationship with cars through the association table 'customer_car'
+    
     cars = association_proxy('customer_cars', 'car')
 
-    # One-to-many relationship with rentals
+
     rentals = db.relationship('Rental', backref='customer')
 
-    serialize_rules = ('-rentals.customer', '-profile.customers')  # Avoid serialization of related models
+    serialize_rules = ('-rentals.customer', '-profile.customers')
 
 
-# Association Table: CustomerCar
 class CustomerCar(db.Model):
     __tablename__ = 'customer_car'
 
@@ -44,7 +43,6 @@ class CustomerCar(db.Model):
     car = db.relationship('Car', backref='customer_cars')
 
 
-# Car Model
 class Car(db.Model, SerializerMixin):
     __tablename__ = 'cars'
 
@@ -56,10 +54,10 @@ class Car(db.Model, SerializerMixin):
     availability_status = db.Column(db.Boolean, nullable=False)
     color = db.Column(db.String(50), nullable=False)
 
-    # One-to-many relationship with rentals
+
     rentals = db.relationship('Rental', backref='car')
 
-    serialize_rules = ('-rentals.car',)  # Avoid serialization of related rentals
+    serialize_rules = ('-rentals.car',)
 
 
 # Rental Model
@@ -77,4 +75,4 @@ class Rental(db.Model, SerializerMixin):
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'))
     car_id = db.Column(db.Integer, db.ForeignKey('cars.id'))
 
-    serialize_rules = ('-customer.rentals', '-car.rentals')  # Avoid serialization of related models
+    serialize_rules = ('-customer.rentals', '-car.rentals')

@@ -125,12 +125,12 @@ class CustomerDetailResource(Resource):
         except Exception as e:
             return jsonify({"error": str(e)}), 400
 
-# Add Resources to the API
+
 api.add_resource(CustomersResource, '/customers')
 api.add_resource(CustomerDetailResource, '/customers/<int:id>')
 api.add_resource(CarsResource, '/cars')
 api.add_resource(RentalsResource, '/rentals')
 
-# Run the app
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
