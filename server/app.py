@@ -3,12 +3,11 @@ from flask_restful import Resource
 from config import app, db, api
 from models import Customer, CustomerProfile, Car, Rental
 
-# Root route
 @app.route('/')
 def index():
     return '<h1>Car Rental Management System </h1>'
 
-# Customer Resource
+
 class CustomersResource(Resource):
     def get(self):
         customers = Customer.query.all()
@@ -17,23 +16,23 @@ class CustomersResource(Resource):
     def post(self):
         data = request.get_json()
         try:
-            # Create customer profile first
+            #
             new_profile = CustomerProfile(
                 bio=data['profile']['bio'],
                 social_links=data['profile']['social_links'],
-                created_at=data['profile'].get('created_at', None)  # Optional field
+                created_at=data['profile'].get('created_at', None)
             )
             db.session.add(new_profile)
             db.session.commit()
 
-            # Create customer
+
             new_customer = Customer(
                 name=data['name'],
                 email=data['email'],
                 phone_number=data['phone_number'],
                 address=data['address'],
                 date_of_birth=data['date_of_birth'],
-                profile_id=new_profile.id  # Link to the newly created profile
+                profile_id=new_profile.id
             )
             db.session.add(new_customer)
             db.session.commit()
@@ -42,7 +41,7 @@ class CustomersResource(Resource):
         except Exception as e:
             return jsonify({"error": str(e)}), 400
 
-# Car Resource
+
 class CarsResource(Resource):
     def get(self):
         cars = Car.query.all()
@@ -66,7 +65,6 @@ class CarsResource(Resource):
         except Exception as e:
             return jsonify({"error": str(e)}), 400
 
-# Rental Resource
 class RentalsResource(Resource):
     def get(self):
         rentals = Rental.query.all()
@@ -91,7 +89,6 @@ class RentalsResource(Resource):
         except Exception as e:
             return jsonify({"error": str(e)}), 400
 
-# Individual Customer Resource (for showing, updating, and deleting a specific customer)
 class CustomerDetailResource(Resource):
     def get(self, id):
         customer = Customer.query.get_or_404(id)

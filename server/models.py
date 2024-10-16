@@ -24,7 +24,7 @@ class Customer(db.Model, SerializerMixin):
     date_of_birth = db.Column(db.Date, nullable=False)
     profile_id = db.Column(db.Integer, db.ForeignKey('customer_profiles.id'))
 
-    
+
     cars = association_proxy('customer_cars', 'car')
 
 
@@ -60,7 +60,6 @@ class Car(db.Model, SerializerMixin):
     serialize_rules = ('-rentals.car',)
 
 
-# Rental Model
 class Rental(db.Model, SerializerMixin):
     __tablename__ = 'rentals'
 
@@ -71,7 +70,6 @@ class Rental(db.Model, SerializerMixin):
     status = db.Column(db.String(50), nullable=False)
     booking_date = db.Column(db.DateTime, nullable=False)
 
-    # Foreign keys to customers and cars
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'))
     car_id = db.Column(db.Integer, db.ForeignKey('cars.id'))
 

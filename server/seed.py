@@ -70,7 +70,6 @@ if __name__ == '__main__':
         db.session.add_all(cars)
         db.session.commit()
 
-        # Insert your own rentals
         rentals = [
             Rental(
                 start_date=datetime.strptime('2024-08-01', '%Y-%m-%d'),
@@ -86,7 +85,7 @@ if __name__ == '__main__':
                 end_date=datetime.strptime('2024-09-15', '%Y-%m-%d'),
                 total_price=225.00,
                 status="booked",
-                booking_date=datetime.strptime('2024-09-01', '%Y-%m-%d'),  
+                booking_date=datetime.strptime('2024-09-01', '%Y-%m-%d'),
                 customer_id=customers[1].id,
                 car_id=cars[1].id
             )
