@@ -49,6 +49,7 @@ if __name__ == '__main__':
         db.session.commit()
 
 
+
         cars = [
             Car(
                 model="Corolla",
@@ -56,7 +57,8 @@ if __name__ == '__main__':
                 year=2020,
                 price_per_day=50.00,
                 availability_status=True,
-                color="Blue"
+                color="Blue",
+                image_url="https://example.com/images/corolla.jpg"
             ),
             Car(
                 model="Civic",
@@ -64,32 +66,34 @@ if __name__ == '__main__':
                 year=2019,
                 price_per_day=45.00,
                 availability_status=False,
-                color="Red"
+                color="Red",
+                image_url="https://example.com/images/civic.jpg"
             )
         ]
+
         db.session.add_all(cars)
         db.session.commit()
 
         rentals = [
-            Rental(
-                start_date=datetime.strptime('2024-08-01', '%Y-%m-%d'),
-                end_date=datetime.strptime('2024-08-05', '%Y-%m-%d'),
-                total_price=200.00,
-                status="completed",
-                booking_date=datetime.strptime('2024-07-25', '%Y-%m-%d'),
-                customer_id=customers[0].id,
-                car_id=cars[0].id
-            ),
-            Rental(
-                start_date=datetime.strptime('2024-09-10', '%Y-%m-%d'),
-                end_date=datetime.strptime('2024-09-15', '%Y-%m-%d'),
-                total_price=225.00,
-                status="booked",
-                booking_date=datetime.strptime('2024-09-01', '%Y-%m-%d'),
-                customer_id=customers[1].id,
-                car_id=cars[1].id
-            )
-        ]
+                    Rental(
+                        start_date=datetime.strptime('2024-08-01', '%Y-%m-%d'),
+                        end_date=datetime.strptime('2024-08-05', '%Y-%m-%d'),
+                        total_price=200.00,
+                        status="completed",
+                        booking_date=datetime.strptime('2024-07-25', '%Y-%m-%d'),
+                        customer_id=customers[0].id,
+                        car_id=cars[0].id
+                    ),
+                    Rental(
+                        start_date=datetime.strptime('2024-09-10', '%Y-%m-%d'),
+                        end_date=datetime.strptime('2024-09-15', '%Y-%m-%d'),
+                        total_price=225.00,
+                        status="booked",
+                        booking_date=datetime.strptime('2024-09-01', '%Y-%m-%d'),
+                        customer_id=customers[1].id,
+                        car_id=cars[1].id
+                    )
+                ]
         db.session.add_all(rentals)
         db.session.commit()
 
