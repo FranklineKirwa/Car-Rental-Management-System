@@ -5,6 +5,7 @@ import Cars from "./Car";
 import Rentals from "./Rentals";
 import Admins from "./Admins";
 import "./App.css";
+import Footer from "./Footer";
 
 function App() {
   return (
@@ -45,9 +46,11 @@ function App() {
             <p>Please select a section from the menu.</p>
           </Route>
         </Switch>
+        <Footer/>{Footer}
       </div>
     </Router>
   );
 }
 
 export default App;
+

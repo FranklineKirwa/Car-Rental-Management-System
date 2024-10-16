@@ -48,8 +48,6 @@ if __name__ == '__main__':
         db.session.add_all(customers)
         db.session.commit()
 
-
-
         cars = [
             Car(
                 model="Corolla",
@@ -58,7 +56,7 @@ if __name__ == '__main__':
                 price_per_day=50.00,
                 availability_status=True,
                 color="Blue",
-                image_url="https://example.com/images/corolla.jpg"
+                image_url="https://pictures-kenya.jijistatic.com/70414400_MzAwLTE4OC0zMDVlMjUwNTgz.webp"
             ),
             Car(
                 model="Civic",
@@ -67,7 +65,7 @@ if __name__ == '__main__':
                 price_per_day=45.00,
                 availability_status=False,
                 color="Red",
-                image_url="https://example.com/images/civic.jpg"
+                image_url="https://pictures-kenya.jijistatic.com/70150977_MzAwLTE2OS01MTJmNWU5Nzlm.webp"
             )
         ]
 
@@ -98,3 +96,4 @@ if __name__ == '__main__':
         db.session.commit()
 
         print("Seeding with custom data completed!")
+

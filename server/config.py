@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
+import os
 
 # Local imports
 
@@ -29,3 +30,7 @@ api = Api(app)
 
 # Instantiate CORS
 CORS(app)
+
+class Config:
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'your_secret_key_here'
+    JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY') or 'your_jwt_secret_key_here'
