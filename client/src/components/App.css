@@ -1,0 +1,115 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  color: #343a40;
+}
+
+.navbar {
+  background-color: #007bff;
+  padding: 10px 20px;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.nav-link:hover {
+  background-color: #0056b3;
+  transition: background-color 0.3s;
+}
+
+h2 {
+  text-align: center;
+  color: #343a40;
+}
+
+p {
+  text-align: center;
+  color: #6c757d;
+}
+
+.car-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: white; /* Card background */
+  padding: 15px; /* Card padding */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  transition: transform 0.2s; /* Transition for hover effect */
+}
+
+.car-item:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+}
+
+.car-image {
+  width: 150px; /* Increased width for larger images */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 20px;
+  border-radius: 5px; /* Rounded image corners */
+}
+
+h3 {
+  margin: 0;
+  color: #343a40; /* Headings color */
+}
+
+.price {
+  color: #28a745; /* Green color for price */
+  font-weight: bold; /* Bold price */
+  font-size: 1.2em; /* Slightly larger price */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .car-item {
+    flex-direction: column; /* Stack items on smaller screens */
+    align-items: flex-start; /* Align items to start */
+  }
+
+  .car-image {
+    margin-bottom: 10px; /* Margin at the bottom for stacked layout */
+  }
+}
+
+html, body {
+  height: 100%; /* Full height for the body and html */
+  margin: 0; /* Remove default margin */
+}
+
+#app-container {
+  display: flex; /* Use flexbox for the layout */
+  flex-direction: column; /* Stack children vertically */
+  min-height: 100vh; /* Ensure it takes full height */
+}
+
+.main-content {
+  flex: 1; /* Allow main content to grow and take available space */
+}
+
+.footer {
+  background-color: #343a40; /* Footer background */
+  color: white; /* Footer text color */
+  padding: 20px; /* Padding around footer */
+  text-align: center; /* Center text */
+  margin-top: auto; /* Push footer to the bottom */
+}
