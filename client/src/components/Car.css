@@ -1,0 +1,45 @@
+/* Add to your Cars.css or an appropriate CSS file */
+input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
+}
+/* Car.css */
+.car-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.car-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.rent-button, .book-button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.rent-button:hover, .book-button:hover {
+  background-color: #0056b3;
+}
+
+.rent-button {
+  background-color: #28a745; /* Green for Rent Now */
+}
+
+.book-button {
+  background-color: #ffc107; /* Yellow for Book */
+}
