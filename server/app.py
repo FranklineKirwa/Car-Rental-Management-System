@@ -1,13 +1,14 @@
 from flask import request, jsonify
 from flask_restful import Resource
 from config import app, db, api
-from models import Customer, CustomerProfile, Car, Rental
+from models import Customer, CustomerProfile, Car, Rental, Admin
+#from werkzeug.security import generate_password_hash, check_password_hash
 
 @app.route('/')
 def index():
     return '<h1>Car Rental Management System </h1>'
 
-
+# Customers Resource
 class CustomersResource(Resource):
     def get(self):
         customers = Customer.query.all()
@@ -16,7 +17,6 @@ class CustomersResource(Resource):
     def post(self):
         data = request.get_json()
         try:
-            #
             new_profile = CustomerProfile(
                 bio=data['profile']['bio'],
                 social_links=data['profile']['social_links'],
@@ -24,7 +24,6 @@ class CustomersResource(Resource):
             )
             db.session.add(new_profile)
             db.session.commit()
-
 
             new_customer = Customer(
                 name=data['name'],
@@ -41,7 +40,7 @@ class CustomersResource(Resource):
         except Exception as e:
             return jsonify({"error": str(e)}), 400
 
-
+# Cars Resource
 class CarsResource(Resource):
     def get(self):
         cars = Car.query.all()
@@ -65,6 +64,7 @@ class CarsResource(Resource):
         except Exception as e:
             return jsonify({"error": str(e)}), 400
 
+# Rentals Resource
 class RentalsResource(Resource):
     def get(self):
         rentals = Rental.query.all()
@@ -89,6 +89,7 @@ class RentalsResource(Resource):
         except Exception as e:
             return jsonify({"error": str(e)}), 400
 
+# Customer Detail Resource
 class CustomerDetailResource(Resource):
     def get(self, id):
         customer = Customer.query.get_or_404(id)
@@ -122,12 +123,64 @@ class CustomerDetailResource(Resource):
         except Exception as e:
             return jsonify({"error": str(e)}), 400
 
+# Admins Resource
+class AdminsResource(Resource):
+    def get(self):
+        admins = Admin.query.all()
+        return jsonify([admin.to_dict() for admin in admins])
 
+    def post(self):
+        data = request.get_json()
+        try:
+            new_admin = Admin(
+                name=data['name'],
+                email=data['email'],
+            )
+            new_admin.set_password(data['password'])
+            db.session.add(new_admin)
+            db.session.commit()
+
+            return jsonify(new_admin.to_dict()), 201
+        except Exception as e:
+            return jsonify({"error": str(e)}), 400
+
+# Admin Detail Resource
+class AdminDetailResource(Resource):
+    def get(self, id):
+        admin = Admin.query.get_or_404(id)
+        return jsonify(admin.to_dict())
+
+    def patch(self, id):
+        admin = Admin.query.get_or_404(id)
+        data = request.get_json()
+        try:
+            if 'name' in data:
+                admin.name = data['name']
+            if 'email' in data:
+                admin.email = data['email']
+            if 'password' in data:
+                admin.set_password(data['password'])
+            db.session.commit()
+            return jsonify(admin.to_dict()), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 400
+
+    def delete(self, id):
+        admin = Admin.query.get_or_404(id)
+        try:
+            db.session.delete(admin)
+            db.session.commit()
+            return jsonify({"message": "Admin deleted"}), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 400
+
+# Add Resources to API
 api.add_resource(CustomersResource, '/customers')
 api.add_resource(CustomerDetailResource, '/customers/<int:id>')
 api.add_resource(CarsResource, '/cars')
 api.add_resource(RentalsResource, '/rentals')
-
+api.add_resource(AdminsResource, '/admins')
+api.add_resource(AdminDetailResource, '/admins/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

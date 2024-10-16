@@ -1,6 +1,9 @@
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy_serializer import SerializerMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 from config import db
+from datetime import datetime
+
 
 class CustomerProfile(db.Model, SerializerMixin):
     __tablename__ = 'customer_profiles'
@@ -24,9 +27,7 @@ class Customer(db.Model, SerializerMixin):
     date_of_birth = db.Column(db.Date, nullable=False)
     profile_id = db.Column(db.Integer, db.ForeignKey('customer_profiles.id'))
 
-
     cars = association_proxy('customer_cars', 'car')
-
 
     rentals = db.relationship('Rental', backref='customer')
 
@@ -54,7 +55,6 @@ class Car(db.Model, SerializerMixin):
     availability_status = db.Column(db.Boolean, nullable=False)
     color = db.Column(db.String(50), nullable=False)
 
-
     rentals = db.relationship('Rental', backref='car')
 
     serialize_rules = ('-rentals.car',)
@@ -74,3 +74,21 @@ class Rental(db.Model, SerializerMixin):
     car_id = db.Column(db.Integer, db.ForeignKey('cars.id'))
 
     serialize_rules = ('-customer.rentals', '-car.rentals')
+
+
+class Admin(db.Model, SerializerMixin):
+    __tablename__ = 'admins'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    password_hash = db.Column(db.String(128), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    serialize_rules = ('-password_hash',)
