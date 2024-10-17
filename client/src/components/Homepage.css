@@ -1,0 +1,55 @@
+.homepage-container {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f7f7f7;
+  }
+  
+  .homepage-header h1 {
+    font-size: 3rem;
+    color: #333;
+  }
+  
+  .homepage-header p {
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  .homepage-sections {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  .homepage-card {
+    background-color: rgb(204, 211, 245);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 1rem;
+    padding: 2rem;
+    width: 300px;
+  }
+  
+  .homepage-card h2 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .homepage-card p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .homepage-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .homepage-link:hover {
+    background-color: #0056b3;
+  }
+ 

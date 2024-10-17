@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Customers from "./Customer";
+
 import Cars from "./Car";
 import Rentals from "./Rentals";
+import Homepage from "./Homepage";
 import Admins from "./Admins";
 import "./App.css";
 import Footer from "./Footer";
@@ -15,8 +16,9 @@ function App() {
         <nav className="navbar">
           <ul className="nav-links">
             <li>
-              <Link to="/customers" className="nav-link">Customers</Link>
+              <Link to="/homepage" className="nav-link">Home</Link>
             </li>
+            
             <li>
               <Link to="/cars" className="nav-link">Cars</Link>
             </li>
@@ -29,8 +31,8 @@ function App() {
           </ul>
         </nav>
         <Switch>
-          <Route path="/customers">
-            <Customers />
+          <Route path="/homepage">
+            <Homepage />
           </Route>
           <Route path="/cars">
             <Cars />
@@ -42,8 +44,9 @@ function App() {
             <Admins />
           </Route>
           <Route path="/">
-            <h2>Welcome to the Car Rental Management System</h2>
-            <p>Please select a section from the menu.</p>
+            {/* <h2>Welcome to the Car Rental Management System</h2>
+            <p>Please select a section from the menu.</p> */}
+             <Homepage />
           </Route>
         </Switch>
         <Footer/>{Footer}
