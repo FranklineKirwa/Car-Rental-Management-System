@@ -113,3 +113,52 @@ html, body {
   text-align: center; /* Center text */
   margin-top: auto; /* Push footer to the bottom */
 }
+/* Layout container for the app */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Layout for the main content and sidebar */
+.main-layout {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.sidebar-links {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-link {
+  display: block;
+  padding: 10px 0;
+  text-decoration: none;
+  color: #333;
+}
+
+.sidebar-link:hover {
+  background-color: #ddd;
+}
+
+/* Main content area */
+.content {
+  padding: 20px;
+  flex: 1;
+}
+
+/* Footer styling */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
